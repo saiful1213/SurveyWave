@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import Routes from './Routes/Routes'
+import { HelmetProvider } from 'react-helmet-async'
+import AuthProviders from './Providers/AuthProviders'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <div className='max-w-7xl mx-auto'>
-      <RouterProvider router={Routes}></RouterProvider>
+      <HelmetProvider>
+        <AuthProviders>
+          <RouterProvider router={Routes}>
+          </RouterProvider>
+        </AuthProviders>
+      </HelmetProvider>
+      <ToastContainer />
     </div>
   </React.StrictMode>,
 )

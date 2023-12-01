@@ -1,6 +1,11 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom";
+import { IoMenu } from "react-icons/io5";
+import useAuth from "../../../Hooks/useAuth";
+import userPlaceholder from "../../../assets/userPlaceholder.jpg"
 
 const Navbar = () => {
+   const { user } = useAuth();
+   console.log(user)
 
    const navLinks = <>
       <li className="font-semibold"><NavLink to="/" className={({ isActive }) => isActive ? "bg-green-400" : ""}>Home</NavLink></li>
@@ -8,7 +13,7 @@ const Navbar = () => {
       <li className="font-semibold"><NavLink to="/pricing" className={({ isActive }) => isActive ? "bg-green-400" : ""}>Pricing</NavLink></li>
    </>
 
-//  When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar
+   //  When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar
    let prevScrollpos = window.scrollY;
    window.onscroll = function () {
       const currentScrollPos = window.scrollY;
@@ -21,11 +26,11 @@ const Navbar = () => {
    }
 
    return (
-      <div className="navbar bg-gray-300 fixed z-10 max-w-7xl mx-auto top-0" id="navbar" style={{transition: 'top 0.3s'}}>
+      <div className="navbar bg-gray-300 fixed z-10 max-w-7xl mx-auto top-0" id="navbar" style={{ transition: 'top 0.3s' }}>
          <div className="navbar-start">
             <div className="dropdown">
                <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                  <IoMenu className="text-3xl" />
                </div>
                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                   {navLinks}
@@ -39,7 +44,20 @@ const Navbar = () => {
             </ul>
          </div>
          <div className="navbar-end">
-            <a className="btn">Login</a>
+            {
+               user ?
+                  <div className="dropdown dropdown-end">
+                     <div className="avatar" tabIndex={0}>
+                        <div className="w-12 rounded-full">
+                           <img src={user?.photoURL || userPlaceholder} />
+                        </div>
+                     </div>
+                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li>{user?.displayName}</li>
+                     </ul>
+                  </div>
+                  : <Link to="/login" className="btn">Login</Link>
+            }
          </div>
       </div>
    );
