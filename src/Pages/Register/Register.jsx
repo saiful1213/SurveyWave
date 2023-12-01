@@ -3,24 +3,35 @@ import RegisterImg from "../../assets/registerImg.avif";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
-   const { createUser, googleSignin } = useAuth();
+   const { createUser, googleSignin, updateUserProfile } = useAuth();
    const navigate = useNavigate();
 
-   const handleRegister = event => {
+   const handleRegister = async event => {
       event.preventDefault();
       const form = event.target;
       const name = form.name.value;
       const email = form.email.value;
       const password = form.password.value;
       const image = form.image.files[0];
-      // console.log(name, email, password, image);
+      const formData = new FormData();
+      formData.append('image', image);
+
+      if(password.length < 6){
+         return toast.error('password must be 6 charecter or more')
+      }
+
+      const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_HOSTING_API_KEY}`, formData)
 
       createUser(email, password)
          .then(() => {
-            toast.success('account created successfully')
-            navigate('/')
+            updateUserProfile(name, data.data.display_url)
+               .then(() => {
+                  toast.success('account created successfully')
+                  navigate('/')
+               })
          })
          .catch((error) => {
             toast.error(error.message);

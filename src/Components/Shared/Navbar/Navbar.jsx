@@ -2,9 +2,10 @@ import { Link, NavLink } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import useAuth from "../../../Hooks/useAuth";
 import userPlaceholder from "../../../assets/userPlaceholder.jpg"
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-   const { user } = useAuth();
+   const { user, handleLogOut } = useAuth();
    console.log(user)
 
    const navLinks = <>
@@ -23,6 +24,11 @@ const Navbar = () => {
          document.getElementById("navbar").style.top = "-70px";
       }
       prevScrollpos = currentScrollPos;
+   }
+
+   const signOut = () =>{
+      handleLogOut()
+      toast.success('Logout Success')
    }
 
    return (
@@ -53,10 +59,11 @@ const Navbar = () => {
                         </div>
                      </div>
                      <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li>{user?.displayName}</li>
+                        <li className="my-3 font-bold text-xl">{user?.displayName}</li>
+                        <li><button className="btn btn-success font-bold text-xl" onClick={signOut}>Log Out</button></li>
                      </ul>
                   </div>
-                  : <Link to="/login" className="btn">Login</Link>
+                  : <Link to="/login" className="btn btn-success">Login</Link>
             }
          </div>
       </div>
