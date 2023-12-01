@@ -8,8 +8,20 @@ const Navbar = () => {
       <li className="font-semibold"><NavLink to="/pricing" className={({ isActive }) => isActive ? "bg-green-400" : ""}>Pricing</NavLink></li>
    </>
 
+//  When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar
+   let prevScrollpos = window.scrollY;
+   window.onscroll = function () {
+      const currentScrollPos = window.scrollY;
+      if (prevScrollpos > currentScrollPos) {
+         document.getElementById("navbar").style.top = "0";
+      } else {
+         document.getElementById("navbar").style.top = "-70px";
+      }
+      prevScrollpos = currentScrollPos;
+   }
+
    return (
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-gray-300 fixed z-10 max-w-7xl mx-auto top-0" id="navbar" style={{transition: 'top 0.3s'}}>
          <div className="navbar-start">
             <div className="dropdown">
                <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
