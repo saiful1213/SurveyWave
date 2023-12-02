@@ -1,0 +1,26 @@
+[
+   {
+      "id": 1,
+      "heading": "“Powerful Analytics”",
+      "description": "“Thanks to the powerful analytics of SogoCX, we have saved hours of work sifting through data and created visibility to actionable nuggets, so we can easily act on the feedback and make a difference for our members. As if this wasn’t enough, the support we have received along the way is second to none.”",
+      "customer_img": "https://www.sogolytics.com/wp-content/uploads/2023/05/LaurieFlanders.png",
+      "customer_name": "LAURIE FLANDERS",
+      "customer_designation": "Sales and Accountability Leader All In Federal Credit Union"
+   },
+   {
+      "id": 2,
+      "heading": "“Amazing, quick, and easy reports”",
+      "description": "“The kind of reports that I am able to pull for our exec team is impressive. They look at those and say things like, ‘This is amazing, it's quick, it's easy.’ I couldn’t get that with the last survey company we were utilizing. We’re able to do things I couldn’t have even imagined.”",
+      "customer_img": "https://cdn.sogolytics.com/wp-content/uploads/2023/02/AnthonyCarbonari.png",
+      "customer_name": "ANTHONY CARBONARI",
+      "customer_designation": "Transition of Care Manager Legacy Healthcare LLC"
+   },
+   {
+      "id": 3,
+      "heading": "“Transforming how we communicate”",
+      "description": "“Sogo understood how important this project was to me. They didn’t just sell me a member experience software, they helped me transform how we communicate with our members. My credit union started to see the high response rate and an overall satisfaction score of 9.45 [out of 10].”",
+      "customer_img": "https://cdn.sogolytics.com/wp-content/uploads/2023/02/geniceDecorte.png",
+      "customer_name": "GENICE DECORTE",
+      "customer_designation": "CEO, HealthShare Credit Union, World Health Organization"
+   }
+]
