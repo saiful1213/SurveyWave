@@ -4,7 +4,7 @@ const Accordian = () => {
       <div className="mt-28">
          <h1 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h1>
          <div className="collapse collapse-plus bg-base-200">
-            <input type="radio" name="my-accordion-3" checked="checked" />
+            <input type="radio" name="my-accordion-3" defaultChecked />
             <div className="collapse-title text-xl font-medium">
                Why should I use an online survey platform?
             </div>

@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
    const { user, handleLogOut } = useAuth();
-   console.log(user)
 
    const navLinks = <>
       <li className="font-semibold"><NavLink to="/" className={({ isActive }) => isActive ? "bg-green-400" : ""}>Home</NavLink></li>
