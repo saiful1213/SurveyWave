@@ -8,9 +8,18 @@ const Navbar = () => {
    const { user, handleLogOut } = useAuth();
 
    const navLinks = <>
-      <li className="font-semibold"><NavLink to="/" className={({ isActive }) => isActive ? "bg-green-400" : ""}>Home</NavLink></li>
-      <li className="font-semibold"><NavLink to="/surveys" className={({ isActive }) => isActive ? "bg-green-400" : ""}>Surveys</NavLink></li>
-      <li className="font-semibold"><NavLink to="/pricing" className={({ isActive }) => isActive ? "bg-green-400" : ""}>Pricing</NavLink></li>
+      <NavLink to="/" className={({ isActive }) => isActive ? "bg-green-400 rounded-lg" : ""}>
+         <li className="p-2 font-semibold">Home</li>
+      </NavLink>
+      <NavLink to="/surveys" className={({ isActive }) => isActive ? "bg-green-400 rounded-lg" : ""}>
+         <li className="p-2 font-semibold">Surveys</li>
+      </NavLink>
+      <NavLink to="/pricing" className={({ isActive }) => isActive ? "bg-green-400 rounded-lg" : ""}>
+         <li className="p-2 font-semibold">Pricing</li>
+      </NavLink>
+      <NavLink to="/dashboard" className={({ isActive }) => isActive ? "bg-green-400 rounded-lg" : ""}>
+         <li className="p-2 font-semibold">Dashboard</li>
+      </NavLink>
    </>
 
    //  When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar
@@ -25,7 +34,7 @@ const Navbar = () => {
       prevScrollpos = currentScrollPos;
    }
 
-   const signOut = () =>{
+   const signOut = () => {
       handleLogOut()
       toast.success('Logout Success')
    }

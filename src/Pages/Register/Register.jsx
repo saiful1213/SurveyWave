@@ -4,10 +4,12 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
 import axios from "axios";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
    const { createUser, googleSignin, updateUserProfile } = useAuth();
    const navigate = useNavigate();
+   const axiosPublic = useAxiosPublic();
 
    const handleRegister = async event => {
       event.preventDefault();
@@ -19,7 +21,7 @@ const Register = () => {
       const formData = new FormData();
       formData.append('image', image);
 
-      if(password.length < 6){
+      if (password.length < 6) {
          return toast.error('password must be 6 charecter or more')
       }
 
@@ -29,8 +31,13 @@ const Register = () => {
          .then(() => {
             updateUserProfile(name, data.data.display_url)
                .then(() => {
-                  toast.success('account created successfully')
-                  navigate('/')
+                  const userInfo = { name, email };
+                  axiosPublic.post('/users', userInfo)
+                     .then(() => {
+                        toast.success('account created successfully')
+                        navigate('/')
+                     })
+
                })
          })
          .catch((error) => {
@@ -43,8 +50,13 @@ const Register = () => {
       googleSignin()
          .then(result => {
             console.log(result.user)
-            toast.success('account created successfully')
-            navigate('/')
+            const userInfo = { name: result?.user?.displayName, email: result?.user?.email };
+            axiosPublic.post('/users', userInfo)
+               .then((res) => {
+                  console.log(res.data)
+                  toast.success('account created successfully')
+                  navigate('/')
+               })
          })
          .catch(err => {
             console.log(err.message)

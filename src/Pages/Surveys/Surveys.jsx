@@ -1,28 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
 
-const Survey = () => {
+const Surveys = () => {
    const axiosPublic = useAxiosPublic();
-
    const { data: surveys = [] } = useQuery({
-      queryKey: ["survey"],
+      queryKey: ["surveys"],
       queryFn: async () => {
-         const result = await axiosPublic.get('/surveys');
+         const result = await (axiosPublic.get('/surveys'));
          return result.data;
       }
    })
-
-   const sortedData = surveys.sort((a, b) => b.total_voted - a.total_voted);
-
+   // console.log(surveys);text-center justify-self-center
    return (
-      <div className="my-28 px-4 xl:px-0" id="servey">
-         <h1 className="text-4xl font-bold text-center">Our Most Voted Serveys</h1>
-         <p className="w-full md:w-3/4 lg:w-2/4 text-center mx-auto mt-4 ">Hire the right candidates for the task, test employees knowledge, and understand comprehension levels with the help of our powerful assessment software designed for all industries.</p>
+      <div className=" mt-28">
+
+         <div className="flex">
+            <h1 className="text-4xl font-bold text-right flex-1 mr-36">All Of Our Surveys</h1>
+            <select className="select select-bordered max-w-xs w-full ml-auto">
+               <option disabled selected>Filter by Vote</option>
+               <option value="asc">Asc to Dsc</option>
+               <option value="dsc">Dsc to Asc</option>
+            </select>
+         </div>
+
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
             {
-               sortedData.slice(0, 6).map(item => {
-                  const { _id, title, short_desc, survey_category_img, total_voted } = item;
+               surveys.map(survey => {
+                  const { _id, title, short_desc, total_voted, survey_category_img } = survey;
 
                   return (
                      <div key={_id} className="rounded-2xl shadow-xl border">
@@ -35,7 +40,8 @@ const Survey = () => {
                            <p className="text-xl font-bold mt-3">Total Vote: {total_voted}</p>
                         </div>
                         <Link to={`/surveyDetails/${_id}`}><button className="btn btn-success w-full my-3">Survey Details</button></Link>
-                     </div>)
+                     </div>
+                  )
                })
             }
          </div>
@@ -43,4 +49,4 @@ const Survey = () => {
    );
 };
 
-export default Survey;
+export default Surveys;

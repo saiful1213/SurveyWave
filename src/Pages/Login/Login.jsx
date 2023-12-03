@@ -1,12 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/loginImg.jpg"
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
    const { login, googleSignin } = useAuth();
    const navigate = useNavigate();
+   const location = useLocation();
+   const axiosPublic = useAxiosPublic();
+
+   const from = location?.state?.from?.pathname || "/";
 
    const handleLogin = e => {
       e.preventDefault();
@@ -18,7 +23,7 @@ const Login = () => {
          .then(result => {
             console.log(result);
             toast.success('Login Succssfully')
-            navigate('/')
+            navigate(from)
          })
          .catch(error => {
             toast.error(error.message)
@@ -29,14 +34,18 @@ const Login = () => {
    const handleGoogleSignIn = () => {
       googleSignin()
          .then(res => {
-            navigate('/');
-            console.log(res)
-            toast.success('login successfully')
+            console.log(res);
+            const userInfo = { name: res?.user?.displayName, email: res?.user?.email };
+            axiosPublic.post('/users', userInfo)
+               .then((res) => {
+                  console.log(res.data)
+                  navigate(from);
+                  toast.success('login successfully')
+               })
          })
          .catch(error => {
             console.log(error);
             toast.error(error.message);
-            console.googleSignin(error);
          })
    }
 
