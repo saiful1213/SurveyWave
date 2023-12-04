@@ -16,7 +16,7 @@ const Surveys = () => {
       <div className=" mt-28">
 
          <div className="flex">
-            <h1 className="text-4xl font-bold text-right flex-1 mr-36">All Of Our Surveys</h1>
+            <h1 className="text-4xl font-bold lg:text-right flex-1 mr-8 lg:mr-36">All Of Our Surveys</h1>
             <select className="select select-bordered max-w-xs w-full ml-auto">
                <option disabled selected>Filter by Vote</option>
                <option value="asc">Asc to Dsc</option>
