@@ -1,8 +1,17 @@
-# React + Vite
+# Project Features
+## Project live link: 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- In SurveyWave the online survey project user can easily survey any type of category
+- user can payment monthly basis for become a pro user
+- user can request to the admin for Surveyor role
+- user can vote, like and dislike in survey category.
+- this online survey project tool change the online survey world
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What challenges I have faced for the backend.
+1. Scalability
+Description: Ensuring the backend can scale effectively to handle an increasing number of users and data.
+Solution: Implemented horizontal scaling strategies, optimized database queries, and utilized caching mechanisms.
+2. Data Security
+Description: Protecting sensitive user data and preventing unauthorized access.
+Solution: Implemented robust authentication mechanisms, encrypted sensitive data, and conducted regular security audits.

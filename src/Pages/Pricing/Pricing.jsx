@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Pricing = () => {
    return (
@@ -10,7 +11,7 @@ const Pricing = () => {
                   <h2 className="font-bold text-center text-2xl">$ <span className="text-4xl">99</span> USD/month</h2>
                   <p className="text-center my-3 font-semibold">Billed $1188 Annually</p>
                   <div className="card-actions justify-center">
-                     <button className="btn btn-outline">Buy Now</button>
+                     <Link to="/payment"><button className="btn btn-outline">Buy Now</button></Link>
                   </div>
                </div>
                <h3 className="text-xl font-bold my-4">All Pro features and:</h3>

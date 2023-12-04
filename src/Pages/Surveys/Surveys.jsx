@@ -11,7 +11,7 @@ const Surveys = () => {
          return result.data;
       }
    })
-   // console.log(surveys);text-center justify-self-center
+
    return (
       <div className=" mt-28">
 

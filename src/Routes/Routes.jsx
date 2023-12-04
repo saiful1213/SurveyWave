@@ -14,6 +14,7 @@ import ManageSurvey from "../Pages/Dashboard/ManageSurvey/ManageSurvey";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import AdminRoute from "./AdminRoute";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 
 const Routes = createBrowserRouter([
@@ -37,6 +38,10 @@ const Routes = createBrowserRouter([
          {
             path: '/pricing',
             element: <Pricing></Pricing>
+         },
+         {
+            path: '/payment',
+            element: <Payment></Payment>
          }
       ]
    },
@@ -60,7 +65,6 @@ const Routes = createBrowserRouter([
             path: 'userHome',
             element: <UserHome></UserHome>
          },
-
 
          // admin route
          {
