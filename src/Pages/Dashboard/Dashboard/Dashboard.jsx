@@ -1,9 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
 import useAdmin from "../../../Hooks/useAdmin";
+// import useSurveyor from "../../../Hooks/useSurveyor";
 
 
 const Dashboard = () => {
    const [isAdmin] = useAdmin();
+   // const [isSurveor] = useSurveyor();
+   // console.log(isSurveor)
 
    return (
       <div>

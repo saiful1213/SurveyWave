@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const ManageUsers = () => {
    const axiosSecure = useAxiosSecure();
-   // const [obj, setObj] = useState({});
 
-   const { data: users = [], isLoading } = useQuery({
+   const { data: users = [], isLoading, refetch } = useQuery({
       queryKey: ["users"],
       queryFn: async () => {
          const res = await axiosSecure.get('/users')
@@ -14,28 +14,33 @@ const ManageUsers = () => {
       }
    })
 
-   // users?.forEach(user => setObj(user));
-   // console.log(obj)
-
-   const [value, setValue] = useState(users?.map(user => user?.role || 'user'));
 
    if (isLoading) {
       return <p className="text-center mt-20 text-2xl">Loading...</p>
    }
+
    // make admin
-   // const handleMakeAdmin = async (id) => {
-   //    const result = await axiosSecure.patch(`/users/admin/${id}`)
-   //    console.log(result.data);
-   // }
+   const handleMakeAdmin = async (user) => {
+      Swal.fire({
+         title: "Are you sure?",
+         text: "You want to admin this user",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, Make admin!"
+      }).then(async (result) => {
+         if (result.isConfirmed) {
+            const result = await axiosSecure.patch(`/users/admin/${user._id}`)
+            if (result.data.modifiedCount > 0) {
+               toast.success(`${user?.name} is now admin`)
+               refetch();
+            }
+         }
+      });
 
-
-   const handleSelectValue = async (e, id) => {
-      setValue(e.target.value);
-      const result = await axiosSecure.patch(`/users/setrole?role=${value}&id=${id}`)
-      console.log(result.data);
    }
 
-   console.log(value);
 
    return (
       <div className="mt-6">
@@ -70,15 +75,9 @@ const ManageUsers = () => {
                            <td>{user?.name}</td>
                            <td>{user?.email}</td>
                            <td>
-                              {/* {user?.role === 'admin' ?
+                              {user?.role === 'admin' ?
                                  <button className="btn btn-ghost btn-sm btn-active">Admin</button> :
-                                 <button className="btn btn-ghost btn-sm btn-active" onClick={() => handleMakeAdmin(user._id)}>User</button>} */}
-                              <select defaultValue={value} className="select select-bordered w-1/2 max-w-xs" onChange={() => handleSelectValue(user._id)}>
-                                 <option value={'user'}>user</option>
-                                 <option value={'admin'}>Admin</option>
-                                 <option value={'proUser'}>Pro User</option>
-                                 <option value={'surveyor'}>Surveyor</option>
-                              </select>
+                                 <button className="btn btn-ghost btn-sm btn-active" onClick={() => handleMakeAdmin(user)}>User</button>}
                            </td>
                         </tr>
                      )

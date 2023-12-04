@@ -11,6 +11,9 @@ import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import PrivateRoute from "../Routes/PrivateRoute"
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import ManageSurvey from "../Pages/Dashboard/ManageSurvey/ManageSurvey";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import AdminRoute from "./AdminRoute";
+import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 
 
 const Routes = createBrowserRouter([
@@ -50,12 +53,23 @@ const Routes = createBrowserRouter([
       element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
          {
+            path: '/dashboard',
+            element: <DashboardHome></DashboardHome>
+         },
+         {
+            path: 'userHome',
+            element: <UserHome></UserHome>
+         },
+
+
+         // admin route
+         {
             path: 'manageSurvey',
-            element: <ManageSurvey></ManageSurvey>
+            element: <AdminRoute><ManageSurvey></ManageSurvey></AdminRoute>
          },
          {
             path: 'manageUsers',
-            element: <ManageUsers></ManageUsers>
+            element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
          }
       ]
    }
