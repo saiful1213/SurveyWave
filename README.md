@@ -1,6 +1,6 @@
-# Project Features
-## Project live link: https://surveywave-5b379.web.app
-
+## Technology: React, tailwind css, express js, MongoDB
+### Project live link: https://surveywave-5b379.web.app
+## Project Features
 - In SurveyWave the online survey project user can easily survey any type of category
 - user can payment monthly basis for become a pro user
 - user can request to the admin for Surveyor role
